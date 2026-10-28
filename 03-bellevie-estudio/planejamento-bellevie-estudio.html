@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bellevie Estúdio · Planejamento de Briefing & Tráfego Pago Meta Ads</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #15171A;
+      --bg-surface: #1C1F24;
+      --bg-card: #22262C;
+      --bg-card-hover: #292E36;
+      --brand-orange: #FF6A2B;
+      --brand-orange-hover: #E8581A;
+      --brand-offwhite: #F4F1EA;
+      --brand-gray: #8A8F98;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-active: rgba(255, 106, 43, 0.4);
+      --meta-blue: #0081fb;
+      --wa-green: #25D366;
+      --shadow-sm: 0 4px 12px rgba(0,0,0,0.4);
+      --shadow-lg: 0 16px 36px rgba(0,0,0,0.6);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--brand-offwhite);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Global Switcher */
+    .top-nav {
+      background: rgba(21, 23, 26, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .top-nav .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .top-nav .brand-title .b-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--brand-orange);
+      color: var(--bg-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 900;
+      font-size: 16px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 4px;
+      border-radius: 30px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .nav-tab {
+      padding: 6px 14px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .nav-tab:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-tab.active {
+      background: var(--brand-orange);
+      color: var(--bg-dark);
+      font-weight: 700;
+    }
+
+    .tech-badges {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tech-badge-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      padding: 4px 10px;
+      border-radius: 14px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .tech-badge-item img {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 24px 80px 24px;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 40px;
+      background: linear-gradient(135deg, rgba(21, 23, 26, 0.94) 0%, rgba(28, 31, 36, 0.96) 100%),
+                  url('fotos/bellevie-estudio-sala-musculacao-4k.jpg') center/cover no-repeat;
+      padding: 60px 48px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-content {
+      max-width: 840px;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 106, 43, 0.15);
+      border: 1px solid var(--brand-orange);
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brand-orange);
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 44px;
+      font-weight: 900;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--brand-offwhite);
+      margin-bottom: 24px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 13.5px;
+      color: var(--brand-gray);
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Section Headers */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--brand-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .section-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: var(--border-active);
+      background: var(--bg-card-hover);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+
+    .card-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-badge {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 8px;
+      background: rgba(255, 106, 43, 0.15);
+      color: var(--brand-orange);
+      border: 1px solid rgba(255, 106, 43, 0.3);
+    }
+
+    /* Flowchart Visual Engine */
+    .flowchart-wrapper {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 48px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .flow-steps {
+      display: flex;
+      align-items: stretch;
+      gap: 16px;
+      margin-top: 24px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+    }
+
+    .flow-step-node {
+      flex: 1;
+      min-width: 220px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .flow-step-node.active-focus {
+      border-color: var(--brand-orange);
+      box-shadow: 0 8px 24px rgba(255, 106, 43, 0.15);
+    }
+
+    .flow-step-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--brand-orange);
+      margin-bottom: 8px;
+    }
+
+    .flow-step-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .flow-step-desc {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.5;
+    }
+
+    .flow-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brand-orange);
+      font-size: 20px;
+      padding: 0 4px;
+    }
+
+    /* Integration Panel */
+    .integrations-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .integrations-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .integration-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .integration-card img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+    }
+
+    .integration-card .name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .integration-card .role {
+      font-size: 11px;
+      color: var(--brand-gray);
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      height: 220px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(0deg, rgba(21, 23, 26, 0.95) 0%, transparent 100%);
+      padding: 14px 10px 8px 10px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    /* Pill list */
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .pill-tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      padding: 5px 12px;
+      border-radius: 14px;
+      font-size: 12px;
+      color: var(--brand-offwhite);
+    }
+
+    /* Data table */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    .data-table th {
+      text-align: left;
+      padding: 10px 12px;
+      color: var(--brand-orange);
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .data-table td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .status-ok { background: rgba(37, 211, 102, 0.15); color: #25D366; }
+    .status-alert { background: rgba(255, 170, 0, 0.15); color: #ffaa00; }
+    .status-hold { background: rgba(0, 129, 251, 0.15); color: #0081fb; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Global Navigation Bar -->
+  <nav class="top-nav">
+    <a href="../index.html" class="brand-title">
+      <div class="b-icon">B</div>
+      <span style="font-family:'Unbounded', sans-serif; font-size: 16px; font-weight:800; letter-spacing:-0.02em;">BELLEVIE ESTÚDIO</span>
+    </a>
+
+    <div class="nav-tabs">
+      <a href="../index.html" class="nav-tab">Visão Geral Hub</a>
+      <a href="../01-bhalf/planejamento-bhalf.html" class="nav-tab">01. Bhalf Consultórios</a>
+      <a href="../02-bellevie-salao/planejamento-bellevie-salao.html" class="nav-tab">02. Bellevie Salão</a>
+      <a href="planejamento-bellevie-estudio.html" class="nav-tab active">03. Bellevie Estúdio</a>
+    </div>
+
+    <div class="tech-badges">
+      <div class="tech-badge-item">
+        <img src="../shared-assets/meta-logo.svg" alt="Meta">
+        <span>Meta Ads</span>
+      </div>
+      <div class="tech-badge-item">
+        <img src="../shared-assets/claude-logo.svg" alt="Claude">
+        <span>Claude IA</span>
+      </div>
+      <div class="tech-badge-item">
+        <img src="../shared-assets/jpstudio-logo.svg" alt="JPStudio" style="filter: brightness(0) invert(1);">
+        <span>JPStudio</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- Hero Header -->
+    <div class="hero">
+      <div class="hero-content">
+        <div class="hero-pill">
+          ⚡ Rebranding "Pulso" · Fitness Boutique & Movimento
+        </div>
+        <h1 class="hero-title">Bellevie Estúdio</h1>
+        <p class="hero-subtitle">Corpo forte, mente leve, vida plena · +10 modalidades em um só lugar</p>
+        <div class="hero-meta">
+          <div class="hero-meta-item">📍 <strong>Endereço:</strong> Rua Dom Luiz Guanella, 2761, Girassol (dentro da Bhalf), Capão da Canoa / RS</div>
+          <div class="hero-meta-item">🔥 <strong>Diferencial Regional:</strong> Estúdio boutique multimodalidade sem paralelo no Litoral Norte</div>
+          <div class="hero-meta-item">🎯 <strong>Proposta de Entrada:</strong> Aula Experimental com agendamento direto no WhatsApp</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Integrations & Stack Section -->
+    <div class="section-header">
+      <div>
+        <span class="section-tag">00 · Stack Oficial</span>
+        <h2 class="section-title">Canais, Ferramental & Inteligência de Tráfego</h2>
+      </div>
+    </div>
+
+    <div class="integrations-grid">
+      <div class="integration-card">
+        <img src="../shared-assets/meta-logo.svg" alt="Meta Ads">
+        <div class="name">Meta Ads Manager</div>
+        <div class="role">Campanhas de Captação e Reels</div>
+      </div>
+      <div class="integration-card">
+        <img src="../shared-assets/facebook-logo.svg" alt="Facebook">
+        <div class="name">Facebook Page</div>
+        <div class="role">Bellevie Estúdio Capão</div>
+      </div>
+      <div class="integration-card">
+        <img src="../shared-assets/instagram-logo.svg" alt="Instagram">
+        <div class="name">Instagram Verificado</div>
+        <div class="role">@bellevieestudio</div>
+      </div>
+      <div class="integration-card">
+        <img src="../shared-assets/claude-logo.svg" alt="Claude IA">
+        <div class="name">Claude IA</div>
+        <div class="role">Engenharia de Criativos & Copys</div>
+      </div>
+      <div class="integration-card">
+        <img src="../shared-assets/jpstudio-logo.svg" alt="JPStudio" style="filter: brightness(0) invert(1);">
+        <div class="name">JPStudio Marketing</div>
+        <div class="role">Branding, Design & Performance</div>
+      </div>
+    </div>
+
+    <!-- Seção 1: Briefing & Rebranding "Pulso" -->
+    <div class="section-header">
+      <div>
+        <span class="section-tag">01 · Briefing & Rebranding</span>
+        <h2 class="section-title">Por que a Direção "Pulso" e o Posicionamento</h2>
+      </div>
+      <span class="card-badge">Aprovado pelo João (27/10)</span>
+    </div>
+
+    <div class="grid-3">
+      <!-- Por que mudar -->
+      <div class="card">
+        <div class="card-title">
+          <span>1. O Fim da Confusão Visual</span>
+          <span class="card-badge">Estratégia</span>
+        </div>
+        <p style="font-size:13px; color:rgba(255,255,255,0.7); margin-bottom:12px;">A logo anterior era verde-escuro (#0F3122) e ouro, confundindo-se com a Bhalf e o salão. Com 6 figuras minúsculas, virava borrão no feed.</p>
+        <p style="font-size:13px; color:rgba(255,255,255,0.9);"><strong>A Solução:</strong> Grafite (#15171A) e Laranja elétrico (#FF6A2B). Texto enorme (Unbounded 900) e identidade com a adrenalina de estúdio boutique.</p>
+      </div>
+
+      <!-- +10 Modalidades -->
+      <div class="card">
+        <div class="card-title">
+          <span>2. Multimodalidade Única</span>
+          <span class="card-badge">Grade</span>
+        </div>
+        <p style="font-size:13px; color:rgba(255,255,255,0.7); margin-bottom:12px;">Em vez de obrigar o aluno a fazer só musculação ou só pilates, a Bellevie oferece tudo no mesmo endereço:</p>
+        <div class="pill-list">
+          <span class="pill-tag">🔥 Bungee Workout</span>
+          <span class="pill-tag">🚴 Spinning / Bike Indoor</span>
+          <span class="pill-tag">💃 Ritmos & Dança Cigana</span>
+          <span class="pill-tag">🧘 Pilates Solo & Yoga</span>
+          <span class="pill-tag">💪 TNMI 50+ (Longevidade)</span>
+          <span class="pill-tag">🏋️ Funcional & Força</span>
+        </div>
+      </div>
+
+      <!-- Regra de Linguagem -->
+      <div class="card">
+        <div class="card-title">
+          <span>3. Linguagem & Comunidade</span>
+          <span class="card-badge">Tom de Voz</span>
+        </div>
+        <p style="font-size:13px; color:rgba(255,255,255,0.7); margin-bottom:12px;">Regra expressa da Mitzi: não usar a palavra fria "alunos".</p>
+        <ul style="font-size:13px; padding-left:18px; color:rgba(255,255,255,0.85); display:flex; flex-direction:column; gap:6px;">
+          <li>Chamar no individual de <strong>"você"</strong>: <em>"Escolha o seu ritmo"</em>.</li>
+          <li>Chamar no coletivo de <strong>"turma"</strong> ou <strong>"comunidade"</strong>.</li>
+          <li>Foco em energia, ritmo, música e libertação de estresse, nunca em promessas corporais rasas.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Seção 2: Fluxograma Visual do Funil Meta Ads -->
+    <div class="section-header">
+      <div>
+        <span class="section-tag">02 · Fluxograma do Funil</span>
+        <h2 class="section-title">Da Visualização do Reel à Primeira Aula no Prédio</h2>
+      </div>
+    </div>
+
+    <div class="flowchart-wrapper">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <h3 style="font-family:'Unbounded'; font-size:18px; color:#fff;">Funil de Captação para Aula Experimental</h3>
+        <span class="card-badge" style="background:rgba(255,106,43,0.2); color:var(--brand-orange);">Reels de Alta Energia ➔ WhatsApp ➔ Matrícula</span>
+      </div>
+
+      <div class="flow-steps">
+        <!-- Node 1 -->
+        <div class="flow-step-node">
+          <div>
+            <div class="flow-step-badge">01 · IMPACTO VISUAL</div>
+            <div class="flow-step-title">Reels de Aula com Gente</div>
+            <div class="flow-step-desc">Vídeos curtos de aulas dinâmicas (Bungee, Dança, Spinning) com música envolvente e tipografia pesada na tela. Capão e Xangri-Lá.</div>
+          </div>
+          <div style="margin-top:14px; font-size:11px; color:var(--brand-orange); font-weight:700;">Meta Ads Reels & Stories</div>
+        </div>
+
+        <div class="flow-arrow">➔</div>
+
+        <!-- Node 2 -->
+        <div class="flow-step-node active-focus">
+          <div>
+            <div class="flow-step-badge">02 · OFERTA DE ENTRADA</div>
+            <div class="flow-step-title">Aula Experimental</div>
+            <div class="flow-step-desc">Chamada irresistível: <em>"Venha sentir a energia de uma aula prática no estúdio mais completo de Capão. Agende sua aula experimental."</em></div>
+          </div>
+          <div style="margin-top:14px; font-size:11px; color:var(--brand-orange); font-weight:700;">CTA com Link na Bio</div>
+        </div>
+
+        <div class="flow-arrow">➔</div>
+
+        <!-- Node 3 -->
+        <div class="flow-step-node">
+          <div>
+            <div class="flow-step-badge">03 · TRIAGEM NO WHATSAPP</div>
+            <div class="flow-step-title">Conversa & Encaixe de Horário</div>
+            <div class="flow-step-desc">Lead entra pelo WhatsApp. Atendimento pergunta modalidade favorita e agenda na grade semanal de horários da sala.</div>
+          </div>
+          <div style="margin-top:14px; font-size:11px; color:#25D366; font-weight:700;">WhatsApp do Estúdio</div>
+        </div>
+
+        <div class="flow-arrow">➔</div>
+
+        <!-- Node 4 -->
+        <div class="flow-step-node">
+          <div>
+            <div class="flow-step-badge">04 · CONVERSÃO EM PLANO</div>
+            <div class="flow-step-title">Experiência & Fechamento</div>
+            <div class="flow-step-desc">Após a aula presencial no Bhalf, a recepção apresenta os planos (Mensal, Trimestral ou Livre) para fechamento imediato.</div>
+          </div>
+          <div style="margin-top:14px; font-size:11px; color:var(--brand-offwhite); font-weight:700;">Retenção & Mensalidade</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção 3: Planejamento de Tráfego Pago -->
+    <div class="section-header">
+      <div>
+        <span class="section-tag">03 · Estratégia de Mídia Paga</span>
+        <h2 class="section-title">Planejamento de Tráfego & Formatos Campeões</h2>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Configuração da Campanha -->
+      <div class="card">
+        <div class="card-title">
+          <span>Configuração Recomendada de Tráfego</span>
+          <span class="status-badge status-ok">Verba Sugerida: R$ 500/mês</span>
+        </div>
+        <table class="data-table">
+          <tr>
+            <td><strong>Objetivo Meta:</strong></td>
+            <td>Engajamento ➔ Mensagens no WhatsApp / Aulas Experimentais</td>
+          </tr>
+          <tr>
+            <td><strong>Segmentação Geo:</strong></td>
+            <td>Capão da Canoa e Xangri-Lá (raio de 8 km ao redor do Bhalf)</td>
+          </tr>
+          <tr>
+            <td><strong>Público:</strong></td>
+            <td>Homens e Mulheres de 18 a 55 anos interessados em fitness, dança e saúde</td>
+          </tr>
+          <tr>
+            <td><strong>Posicionamento Principal:</strong></td>
+            <td>Instagram Reels e Stories (formatos em que vídeos dinâmicos de aula convertem 3x mais)</td>
+          </tr>
+          <tr>
+            <td><strong>Mensagem Rastreada:</strong></td>
+            <td><em>"Oi! Vi o anúncio do Bellevie Estúdio e quero marcar minha aula experimental."</em></td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Modelos de Criativos -->
+      <div class="card">
+        <div class="card-title">
+          <span>Os 2 Modelos Visuais Aprovados</span>
+          <span class="card-badge">Design Pulso</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div style="background:var(--bg-card); padding:14px; border-radius:12px; border:1px solid var(--border-subtle);">
+            <div style="font-size:13px; font-weight:700; color:var(--brand-orange); margin-bottom:4px;">1. Modelo `bellevie-estudio-foto`</div>
+            <p style="font-size:12px; color:rgba(255,255,255,0.7);">Foto real da aula no topo, base em grafite escuro, título enorme em Unbounded com uma palavra em laranja e botão de chamada.</p>
+          </div>
+          <div style="background:var(--bg-card); padding:14px; border-radius:12px; border:1px solid var(--border-subtle);">
+            <div style="font-size:13px; font-weight:700; color:var(--brand-orange); margin-bottom:4px;">2. Modelo `bellevie-estudio-lista`</div>
+            <p style="font-size:12px; color:rgba(255,255,255,0.7);">Fundo laranja vibrante (#FF6A2B), tipografia pesada grafite, listando as modalidades e horários da semana com botão de ação.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção 4: Galeria de Ativos Reais -->
+    <div class="section-header">
+      <div>
+        <span class="section-tag">04 · Galeria Visual</span>
+        <h2 class="section-title">Criativos de Teste Aprovados & Fotos da Sala</h2>
+      </div>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="teste-2026-10-27/estudio27-sala.png" alt="Criativo Foto Sala">
+        <div class="gallery-label">Post Foto · Estilo Pulso Aprovado</div>
+      </div>
+      <div class="gallery-item">
+        <img src="teste-2026-10-27/estudio27-lista.png" alt="Criativo Lista Laranja">
+        <div class="gallery-label">Post Lista · Fundo Laranja Vibrante</div>
+      </div>
+      <div class="gallery-item">
+        <img src="fotos/bellevie-estudio-sala-musculacao-4k.jpg" alt="Sala Musculação 4K">
+        <div class="gallery-label">Sala de Musculação & Aulas 4K</div>
+      </div>
+      <div class="gallery-item">
+        <img src="fotos/bhalf-ig-10-academia-retocada.jpg" alt="Academia Retocada">
+        <div class="gallery-label">Área de Aparelhos e Treino</div>
+      </div>
+    </div>
+
+    <!-- Seção 5: Status de Bloqueios no CRM -->
+    <div class="section-header">
+      <div>
+        <span class="section-tag">05 · Checklist de Lançamento</span>
+        <h2 class="section-title">Próximos Passos para o Go-to-Market</h2>
+      </div>
+    </div>
+
+    <div class="card">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Item de Ação</th>
+            <th>Descrição & Prazo</th>
+            <th>Responsável</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="status-badge status-alert">A FAZER</span></td>
+            <td>Captação de vídeos curtos de aulas com gente se mexendo</td>
+            <td>Gravar turma de Bungee Workout e Ritmos com celular na vertical</td>
+            <td>Mari / Mitzi</td>
+          </tr>
+          <tr>
+            <td><span class="status-badge status-alert">DECISÃO</span></td>
+            <td>Definição da oferta da Aula Experimental</td>
+            <td>Definir se é 100% gratuita no primeiro agendamento ou pacote de boas-vindas</td>
+            <td>Mitzi / João</td>
+          </tr>
+          <tr>
+            <td><span class="status-badge status-alert">DECISÃO</span></td>
+            <td>Alocação da verba oficial de tráfego pago na Meta</td>
+            <td>Bhalf e Salão já têm R$ 500/mês cada; aprovar cota do Estúdio</td>
+            <td>Mitzi</td>
+          </tr>
+          <tr>
+            <td><span class="status-badge status-ok">PRONTO</span></td>
+            <td>Rebranding "Pulso" e design system aprovado (27/10)</td>
+            <td>Unbounded + Inter, paleta Grafite/Laranja, fim do conflito cromático</td>
+            <td>JPStudio</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</body>
+</html>

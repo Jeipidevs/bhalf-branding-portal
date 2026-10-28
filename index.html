@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bhalf Complexo & Ecossistema · Master Hub de Planejamento e Tráfego Meta Ads</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Figtree:wght@400;500;600;700&family=Fraunces:ital,wght@1,300;1,400&family=Cormorant+Garamond:wght@600;700&family=Unbounded:wght@700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0b0f0d;
+      --bg-surface: #121815;
+      --bg-card: #18201c;
+      --bg-card-hover: #1e2823;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-highlight: rgba(169, 196, 166, 0.3);
+      --bhalf-salvia: #a9c4a6;
+      --bhalf-green: #6f8f72;
+      --bellevie-gold: #B8862F;
+      --estudio-orange: #FF6A2B;
+      --text-main: #f3f5f1;
+      --text-muted: rgba(255, 255, 255, 0.65);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Figtree', sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 48px 24px 80px 24px;
+    }
+
+    /* Header */
+    .master-header {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto 56px auto;
+    }
+
+    .master-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(169, 196, 166, 0.12);
+      border: 1px solid var(--bhalf-salvia);
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bhalf-salvia);
+      margin-bottom: 20px;
+    }
+
+    .master-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 46px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      margin-bottom: 14px;
+      background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.75) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .master-desc {
+      font-size: 17px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    /* Stack Badges */
+    .stack-ribbon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 60px;
+    }
+
+    .stack-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .stack-badge img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+    }
+
+    /* Brand Cards Grid */
+    .brand-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-bottom: 60px;
+    }
+
+    @media (max-width: 1000px) {
+      .brand-cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .brand-portal-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .brand-portal-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.6);
+    }
+
+    /* Card Themes */
+    .card-bhalf {
+      border-top: 4px solid var(--bhalf-green);
+    }
+    .card-bhalf:hover {
+      border-color: var(--bhalf-salvia);
+    }
+
+    .card-salao {
+      border-top: 4px solid var(--bellevie-gold);
+    }
+    .card-salao:hover {
+      border-color: var(--bellevie-gold);
+    }
+
+    .card-estudio {
+      border-top: 4px solid var(--estudio-orange);
+    }
+    .card-estudio:hover {
+      border-color: var(--estudio-orange);
+    }
+
+    .brand-card-img {
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .brand-portal-card:hover .brand-card-img img {
+      transform: scale(1.06);
+    }
+
+    .brand-card-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .brand-card-body {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .brand-name {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+
+    .brand-slogan {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      min-height: 40px;
+    }
+
+    .brand-highlights {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 24px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 16px;
+    }
+
+    .brand-highlights li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .brand-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 12px 20px;
+      border-radius: 14px;
+      font-size: 13.5px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .brand-btn-sec {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+    }
+    .brand-btn-sec:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-bhalf {
+      background: var(--bhalf-green);
+      color: #fff;
+    }
+    .btn-bhalf:hover {
+      background: #7ca37f;
+    }
+
+    .btn-salao {
+      background: var(--bellevie-gold);
+      color: #fff;
+    }
+    .btn-salao:hover {
+      background: #c99636;
+    }
+
+    .btn-estudio {
+      background: var(--estudio-orange);
+      color: #15171A;
+    }
+    .btn-estudio:hover {
+      background: #ff7e45;
+    }
+
+    /* Global Architecture Diagram */
+    .ecosystem-section {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 36px;
+      margin-bottom: 60px;
+    }
+
+    .ecosystem-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .ecosystem-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    .synergy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .synergy-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .synergy-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .synergy-card h4 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .synergy-card p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 32px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.45);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Master Header -->
+    <header class="master-header">
+      <div class="master-pill">
+        <img src="01-bhalf/logo/selo-bhalf.svg" width="14" height="14" alt="Selo">
+        Capão da Canoa · Litoral Norte Gaúcho
+      </div>
+      <h1 class="master-title">Ecossistema Bhalf & Bellevie</h1>
+      <p class="master-desc">Planejamento executivo de branding, posicionamento e estratégia de tráfego pago Meta Ads para as 3 marcas de Mitzi Herter Brum.</p>
+      
+      <!-- Tech Ribbon -->
+      <div class="stack-ribbon">
+        <div class="stack-badge">
+          <img src="shared-assets/meta-logo.svg" alt="Meta">
+          <span>Meta Ads Manager</span>
+        </div>
+        <div class="stack-badge">
+          <img src="shared-assets/facebook-logo.svg" alt="Facebook">
+          <span>Facebook Business</span>
+        </div>
+        <div class="stack-badge">
+          <img src="shared-assets/instagram-logo.svg" alt="Instagram">
+          <span>Instagram Feed & Reels</span>
+        </div>
+        <div class="stack-badge">
+          <img src="shared-assets/claude-logo.svg" alt="Claude">
+          <span>Claude IA (Estratégia)</span>
+        </div>
+        <div class="stack-badge">
+          <img src="shared-assets/jpstudio-logo.svg" alt="JPStudio" style="filter: brightness(0) invert(1);">
+          <span>JPStudio Marketing</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 3 Brands Cards -->
+    <div class="brand-cards-grid">
+
+      <!-- 01. BHALF -->
+      <div class="brand-portal-card card-bhalf">
+        <div class="brand-card-img">
+          <img src="01-bhalf/logo/foto-de-perfil-letreiro.jpg" alt="Bhalf Fachada">
+          <span class="brand-card-badge">B2B · Locação Comercial</span>
+        </div>
+        <div class="brand-card-body">
+          <div>
+            <h3 class="brand-name" style="font-family:'Archivo';">Bhalf Consultórios</h3>
+            <p class="brand-slogan" style="font-family:'Fraunces'; font-style:italic;">"Seu consultório pronto num prédio com portaria facial e vizinhos que já trazem fluxo."</p>
+            <ul class="brand-highlights">
+              <li>📍 <strong>Endereço:</strong> Rua Dom Luiz Guanella, 2761</li>
+              <li>🏢 <strong>Oferta:</strong> Locação Anual (foco), Diária ou Dia Fixo</li>
+              <li>💰 <strong>Meta Ads:</strong> R$ 500/mês (Salas R$ 350 + Growth R$ 150)</li>
+              <li>🎯 <strong>Público:</strong> Médicos, dentistas, psicólogos e esteticistas</li>
+            </ul>
+          </div>
+          <div class="brand-btn-group">
+            <a href="01-bhalf/planejamento-bhalf.html" class="brand-btn btn-bhalf">
+              <span>Acessar Planejamento Bhalf</span>
+              <span>➔</span>
+            </a>
+            <a href="01-bhalf/cartao-orcamento.html" class="brand-btn brand-btn-sec">
+              <span>📱 Cartão Digital (WhatsApp)</span>
+            </a>
+            <a href="01-bhalf/cartao-impressao-a4.html" class="brand-btn brand-btn-sec" style="border-color:var(--bhalf-salvia); color:var(--bhalf-salvia);">
+              <span>🖨️ Folha A4 de Impressão (4 Cartões)</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02. BELLEVIE SALÃO -->
+      <div class="brand-portal-card card-salao">
+        <div class="brand-card-img">
+          <img src="02-bellevie-salao/fotos-do-perfil/bellevie-ig-espaco-equipe.jpg" alt="Bellevie Salão">
+          <span class="brand-card-badge">B2C · Salão & Estética</span>
+        </div>
+        <div class="brand-card-body">
+          <div>
+            <h3 class="brand-name" style="font-family:'Cormorant Garamond';">Bellevie Beleza & Estética</h3>
+            <p class="brand-slogan">"O salão perto da sua casa com cuidado e tecnologia de clínica."</p>
+            <ul class="brand-highlights">
+              <li>✨ <strong>Diferenciais:</strong> Banheira de hidro no spa dos pés & massagem</li>
+              <li>👩‍💼 <strong>Equipe:</strong> Luiza Consul (15 anos) + especialistas</li>
+              <li>💰 <strong>Meta Ads:</strong> R$ 500/mês (~R$ 16,67/dia)</li>
+              <li>🎯 <strong>Público:</strong> Mulheres 25–60 anos no raio de 3 km</li>
+            </ul>
+          </div>
+          <div class="brand-btn-group">
+            <a href="02-bellevie-salao/planejamento-bellevie-salao.html" class="brand-btn btn-salao">
+              <span>Acessar Planejamento Salão</span>
+              <span>➔</span>
+            </a>
+            <a href="02-bellevie-salao/cartao-orcamento.html" class="brand-btn brand-btn-sec">
+              <span>📱 Cartão Digital (WhatsApp)</span>
+            </a>
+            <a href="02-bellevie-salao/cartao-impressao-a4.html" class="brand-btn brand-btn-sec" style="border-color:var(--bellevie-gold); color:var(--bellevie-gold);">
+              <span>🖨️ Folha A4 de Impressão (4 Cartões)</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03. BELLEVIE ESTÚDIO -->
+      <div class="brand-portal-card card-estudio">
+        <div class="brand-card-img">
+          <img src="03-bellevie-estudio/fotos/bellevie-estudio-sala-musculacao-4k.jpg" alt="Bellevie Estúdio">
+          <span class="brand-card-badge">B2C · Fitness Boutique</span>
+        </div>
+        <div class="brand-card-body">
+          <div>
+            <h3 class="brand-name" style="font-family:'Unbounded'; font-size:19px;">Bellevie Estúdio</h3>
+            <p class="brand-slogan">"Corpo forte, mente leve, vida plena · +10 modalidades em um só lugar."</p>
+            <ul class="brand-highlights">
+              <li>⚡ <strong>Rebranding Pulso:</strong> Grafite (#15171A) & Laranja (#FF6A2B)</li>
+              <li>🔥 <strong>Modalidades:</strong> Bungee, Spinning, Ritmos, Pilates, Yoga</li>
+              <li>💰 <strong>Meta Ads:</strong> Campanhas de Reels com turmas em movimento</li>
+              <li>🎯 <strong>Público:</strong> 18 a 55 anos buscando ritmo e energia</li>
+            </ul>
+          </div>
+          <div class="brand-btn-group">
+            <a href="03-bellevie-estudio/planejamento-bellevie-estudio.html" class="brand-btn btn-estudio">
+              <span>Acessar Planejamento Estúdio</span>
+              <span>➔</span>
+            </a>
+            <a href="03-bellevie-estudio/cartao-orcamento.html" class="brand-btn brand-btn-sec">
+              <span>📱 Cartão Digital (WhatsApp)</span>
+            </a>
+            <a href="03-bellevie-estudio/cartao-impressao-a4.html" class="brand-btn brand-btn-sec" style="border-color:var(--estudio-orange); color:var(--estudio-orange);">
+              <span>🖨️ Folha A4 de Impressão (4 Cartões)</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Sinergia do Complexo -->
+    <section class="ecosystem-section">
+      <h3 class="ecosystem-title">Sinergia e Regras Transversais do Ecossistema</h3>
+      <p class="ecosystem-desc">Como as três marcas se retroalimentam sob o mesmo teto em Capão da Canoa.</p>
+
+      <div class="synergy-grid">
+        <div class="synergy-card">
+          <h4>1. Fixação do Endereço (A Regra do João)</h4>
+          <p>Todo e qualquer criativo de tráfego, post de feed ou vídeo leva o endereço físico com a cidade: <em>"Rua Dom Luiz Guanella, 2761, Capão da Canoa"</em>. Isso gera reconhecimento contínuo de ponto geográfico.</p>
+        </div>
+
+        <div class="synergy-card">
+          <h4>2. Retroalimentação de Fluxo Físico</h4>
+          <p>A aluna do Estúdio faz as unhas no Salão após o treino; a cliente do Salão consome no ATL Bistrô e repara nos consultórios médicos da Bhalf. Cada real investido em tráfego beneficia indiretamente as outras duas marcas.</p>
+        </div>
+
+        <div class="synergy-card">
+          <h4>3. Diferenciação Visual Definitiva</h4>
+          <p>Fim da confusão de cores: a <strong>Bhalf</strong> é Verde Sóbrio B2B; o <strong>Salão</strong> é Areia & Âmbar Feminino Delicado; o <strong>Estúdio</strong> é Grafite & Laranja Esportivo. Identidades únicas que coexistem em harmonia.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>Desenvolvido para JPStudio · Bhalf Centro Integrativo · Capão da Canoa / RS · Outubro de 2026</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>

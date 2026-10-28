@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bhalf Centro Integrativo · Cartão de Orçamento Impresso (Folha A4 · 4 Cartões)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Figtree:wght@400;500;600;700&family=Fraunces:ital,wght@1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --verde-profundo: #141D18;
+      --verde-salvia: #6F8F72;
+      --verde-salvia-clara: #A9C4A6;
+      --papel-bg: #FCFBF9;
+      --papel-card: #FFFFFF;
+      --tinta-texto: #1C2420;
+      --tinta-suave: #4A5650;
+      --linha-guia: #D2D8D4;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    body {
+      background-color: #EAE6DF;
+      font-family: 'Figtree', sans-serif;
+      color: var(--tinta-texto);
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 10px;
+    }
+
+    /* Barra Superior de Ações (Oculta na Impressão) */
+    .print-bar {
+      width: 210mm;
+      max-width: 100%;
+      background: #141D18;
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: 14px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    }
+
+    .print-btn {
+      background: var(--verde-salvia-clara);
+      color: #0F1714;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .print-btn:hover {
+      background: #c2d9bf;
+    }
+
+    /* Folha A4 Exata */
+    .a4-sheet {
+      width: 210mm;
+      height: 297mm;
+      background: var(--papel-bg);
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+      display: grid;
+      grid-template-columns: 105mm 105mm;
+      grid-template-rows: 148.5mm 148.5mm;
+      overflow: hidden;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* Guias de Corte / Refile */
+    .cut-line-v {
+      position: absolute;
+      left: 105mm;
+      top: 0;
+      bottom: 0;
+      width: 0;
+      border-left: 0.5px dashed var(--linha-guia);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .cut-line-h {
+      position: absolute;
+      top: 148.5mm;
+      left: 0;
+      right: 0;
+      height: 0;
+      border-top: 0.5px dashed var(--linha-guia);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .crop-mark-center {
+      position: absolute;
+      left: 105mm;
+      top: 148.5mm;
+      width: 14px;
+      height: 14px;
+      transform: translate(-50%, -50%);
+      color: var(--linha-guia);
+      font-size: 14px;
+      line-height: 14px;
+      text-align: center;
+      z-index: 11;
+    }
+
+    /* O Cartão Individual (A6: 105mm x 148.5mm) */
+    .card-unit {
+      position: relative;
+      padding: 8mm 9mm 7mm 9mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #FFFFFF;
+      overflow: hidden;
+    }
+
+    /* Moldura Sutil de Luxo */
+    .card-inner-frame {
+      position: absolute;
+      top: 3.5mm;
+      left: 3.5mm;
+      right: 3.5mm;
+      bottom: 3.5mm;
+      border: 0.6px solid rgba(20, 29, 24, 0.14);
+      pointer-events: none;
+      border-radius: 4px;
+    }
+
+    /* Cabeçalho do Cartão */
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1.2px solid var(--verde-profundo);
+      padding-bottom: 2mm;
+      margin-bottom: 2.5mm;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 2.5mm;
+    }
+
+    .brand-logo {
+      width: 7mm;
+      height: 7mm;
+    }
+
+    .brand-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 9pt;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--verde-profundo);
+      line-height: 1;
+    }
+
+    .brand-subtitle {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 6.5pt;
+      color: var(--verde-salvia);
+      margin-top: 0.5mm;
+    }
+
+    .card-doc-type {
+      text-align: right;
+    }
+
+    .doc-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 5.5pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--verde-profundo);
+      background: rgba(169, 196, 166, 0.25);
+      padding: 1mm 2mm;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    /* Área de Preenchimento à Caneta */
+    .pen-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2mm;
+    }
+
+    .field-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 2mm;
+      font-size: 7pt;
+    }
+
+    .field-label {
+      font-weight: 700;
+      color: var(--verde-profundo);
+      white-space: nowrap;
+      text-transform: uppercase;
+      font-size: 6pt;
+      letter-spacing: 0.04em;
+    }
+
+    .field-line {
+      flex: 1;
+      border-bottom: 0.6px solid #CBD2CD;
+      height: 4mm;
+    }
+
+    /* Seleção de Modalidades */
+    .checkbox-group {
+      display: flex;
+      justify-content: space-between;
+      margin: 1mm 0;
+      padding: 1.2mm 2mm;
+      background: #F8F9F8;
+      border: 0.5px solid #E2E6E3;
+      border-radius: 3px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 1.2mm;
+      font-size: 6pt;
+      font-weight: 600;
+      color: var(--tinta-suave);
+    }
+
+    .box-square {
+      width: 2.8mm;
+      height: 2.8mm;
+      border: 0.8px solid var(--verde-profundo);
+      border-radius: 1px;
+      background: #fff;
+    }
+
+    /* Linhas Livres para Descrição / Observações */
+    .notes-box {
+      margin-top: 1mm;
+      display: flex;
+      flex-direction: column;
+      gap: 2.8mm;
+    }
+
+    .notes-line {
+      border-bottom: 0.5px dotted #BFC7C1;
+      height: 0;
+    }
+
+    /* Bloco de Valor e Condição */
+    .val-box {
+      margin-top: 2mm;
+      background: rgba(20, 29, 24, 0.03);
+      border: 0.8px solid rgba(20, 29, 24, 0.15);
+      border-radius: 4px;
+      padding: 1.8mm 2.5mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .val-left {
+      font-size: 6.5pt;
+      font-weight: 700;
+      color: var(--verde-profundo);
+      text-transform: uppercase;
+    }
+
+    .val-display {
+      font-family: 'Archivo', sans-serif;
+      font-size: 10pt;
+      font-weight: 800;
+      color: var(--verde-profundo);
+      display: flex;
+      align-items: baseline;
+      gap: 1.5mm;
+    }
+
+    .val-line {
+      width: 28mm;
+      border-bottom: 1px solid var(--verde-profundo);
+      height: 4.5mm;
+    }
+
+    /* Rodapé do Cartão */
+    .card-footer {
+      border-top: 0.5px solid rgba(20, 29, 24, 0.15);
+      padding-top: 1.5mm;
+      margin-top: 2mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      font-size: 5.5pt;
+      color: var(--tinta-suave);
+      line-height: 1.25;
+    }
+
+    .footer-address strong {
+      color: var(--verde-profundo);
+    }
+
+    .marca-dagua-selo {
+      position: absolute;
+      right: 5mm;
+      bottom: 5mm;
+      width: 24mm;
+      height: 24mm;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+
+    @media print {
+      body {
+        background: transparent;
+        padding: 0;
+      }
+      .print-bar {
+        display: none !important;
+      }
+      .a4-sheet {
+        box-shadow: none;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de Controle de Impressão -->
+  <div class="print-bar">
+    <div>
+      <strong style="font-size:14px;">Bhalf Centro Integrativo · Cartão de Orçamento de Consultórios</strong>
+      <div style="font-size:11.5px; opacity:0.8;">Folha A4 oficial com 4 cartões de preenchimento manual (105 x 148.5 mm cada).</div>
+    </div>
+    <button class="print-btn" onclick="window.print()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+      Imprimir Folha A4 (4 Cartões)
+    </button>
+  </div>
+
+  <!-- Folha A4 com 4 Cartões -->
+  <div class="a4-sheet">
+
+    <!-- Linhas de Corte para Refile -->
+    <div class="cut-line-v"></div>
+    <div class="cut-line-h"></div>
+    <div class="crop-mark-center">✂</div>
+
+    <!-- CARTÃO 1 (Superior Esquerdo) -->
+    <div class="card-unit">
+      <div class="card-inner-frame"></div>
+      <img src="logo/selo-bhalf.svg" class="marca-dagua-selo" alt="">
+
+      <div>
+        <div class="card-header">
+          <div class="brand-group">
+            <img src="logo/selo-bhalf.svg" class="brand-logo" alt="Selo">
+            <div>
+              <div class="brand-title">Bhalf Centro Integrativo</div>
+              <div class="brand-subtitle">Consultórios de Saúde, Estética e Movimento</div>
+            </div>
+          </div>
+          <div class="card-doc-type">
+            <span class="doc-badge">Orçamento</span>
+          </div>
+        </div>
+
+        <div class="pen-area">
+          <div class="field-row">
+            <span class="field-label">Profissional / Clínica:</span>
+            <div class="field-line"></div>
+          </div>
+
+          <div class="field-row">
+            <span class="field-label">Especialidade:</span>
+            <div class="field-line" style="flex:1.2;"></div>
+            <span class="field-label">Data:</span>
+            <div class="field-line" style="flex:0.8;"></div>
+          </div>
+
+          <div class="checkbox-group">
+            <div class="checkbox-item"><div class="box-square"></div> Locação Anual</div>
+            <div class="checkbox-item"><div class="box-square"></div> Dia Fixo Semanal</div>
+            <div class="checkbox-item"><div class="box-square"></div> Diária / Turno</div>
+          </div>
+
+          <div class="field-row">
+            <span class="field-label">Sala Indicada:</span>
+            <div class="field-line" style="flex:1;"></div>
+            <span class="field-label">Período / Dia:</span>
+            <div class="field-line" style="flex:1.4;"></div>
+          </div>
+
+          <div class="notes-box">
+            <div style="font-size:5.5pt; font-weight:700; color:var(--verde-salvia); text-transform:uppercase;">Condições Específicas / Vistoria:</div>
+            <div class="notes-line"></div>
+            <div class="notes-line"></div>
+            <div class="notes-line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="val-box">
+          <div class="val-left">
+            Investimento Proposto
+            <div style="font-size:5pt; font-weight:400; text-transform:none; color:var(--tinta-suave);">Condomínio, IPTU e Wi-Fi inclusos</div>
+          </div>
+          <div class="val-display">
+            <span>R$</span>
+            <div class="val-line"></div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <div class="footer-address">
+            <strong>Rua Dom Luiz Guanella, 2761</strong> · Capão da Canoa / RS<br>
+            Duas frentes (Guanella e Carajás) · Portaria facial · Elevadores
+          </div>
+          <div style="text-align:right;">
+            <strong>(51) 9827-0222</strong><br>
+            Mitzi Herter Brum
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARTÃO 2 (Superior Direito) -->
+    <div class="card-unit">
+      <div class="card-inner-frame"></div>
+      <img src="logo/selo-bhalf.svg" class="marca-dagua-selo" alt="">
+
+      <div>
+        <div class="card-header">
+          <div class="brand-group">
+            <img src="logo/selo-bhalf.svg" class="brand-logo" alt="Selo">
+            <div>
+              <div class="brand-title">Bhalf Centro Integrativo</div>
+              <div class="brand-subtitle">Consultórios de Saúde, Estética e Movimento</div>
+            </div>
+          </div>
+          <div class="card-doc-type">
+            <span class="doc-badge">Orçamento</span>
+          </div>
+        </div>
+
+        <div class="pen-area">
+          <div class="field-row">
+            <span class="field-label">Profissional / Clínica:</span>
+            <div class="field-line"></div>
+          </div>
+
+          <div class="field-row">
+            <span class="field-label">Especialidade:</span>
+            <div class="field-line" style="flex:1.2;"></div>
+            <span class="field-label">Data:</span>
+            <div class="field-line" style="flex:0.8;"></div>
+          </div>
+
+          <div class="checkbox-group">
+            <div class="checkbox-item"><div class="box-square"></div> Locação Anual</div>
+            <div class="checkbox-item"><div class="box-square"></div> Dia Fixo Semanal</div>
+            <div class="checkbox-item"><div class="box-square"></div> Diária / Turno</div>
+          </div>
+
+          <div class="field-row">
+            <span class="field-label">Sala Indicada:</span>
+            <div class="field-line" style="flex:1;"></div>
+            <span class="field-label">Período / Dia:</span>
+            <div class="field-line" style="flex:1.4;"></div>
+          </div>
+
+          <div class="notes-box">
+            <div style="font-size:5.5pt; font-weight:700; color:var(--verde-salvia); text-transform:uppercase;">Condições Específicas / Vistoria:</div>
+            <div class="notes-line"></div>
+            <div class="notes-line"></div>
+            <div class="notes-line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="val-box">
+          <div class="val-left">
+            Investimento Proposto
+            <div style="font-size:5pt; font-weight:400; text-transform:none; color:var(--tinta-suave);">Condomínio, IPTU e Wi-Fi inclusos</div>
+          </div>
+          <div class="val-display">
+            <span>R$</span>
+            <div class="val-line"></div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <div class="footer-address">
+            <strong>Rua Dom Luiz Guanella, 2761</strong> · Capão da Canoa / RS<br>
+            Duas frentes (Guanella e Carajás) · Portaria facial · Elevadores
+          </div>
+          <div style="text-align:right;">
+            <strong>(51) 9827-0222</strong><br>
+            Mitzi Herter Brum
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARTÃO 3 (Inferior Esquerdo) -->
+    <div class="card-unit">
+      <div class="card-inner-frame"></div>
+      <img src="logo/selo-bhalf.svg" class="marca-dagua-selo" alt="">
+
+      <div>
+        <div class="card-header">
+          <div class="brand-group">
+            <img src="logo/selo-bhalf.svg" class="brand-logo" alt="Selo">
+            <div>
+              <div class="brand-title">Bhalf Centro Integrativo</div>
+              <div class="brand-subtitle">Consultórios de Saúde, Estética e Movimento</div>
+            </div>
+          </div>
+          <div class="card-doc-type">
+            <span class="doc-badge">Orçamento</span>
+          </div>
+        </div>
+
+        <div class="pen-area">
+          <div class="field-row">
+            <span class="field-label">Profissional / Clínica:</span>
+            <div class="field-line"></div>
+          </div>
+
+          <div class="field-row">
+            <span class="field-label">Especialidade:</span>
+            <div class="field-line" style="flex:1.2;"></div>
+            <span class="field-label">Data:</span>
+            <div class="field-line" style="flex:0.8;"></div>
+          </div>
+
+          <div class="checkbox-group">
+            <div class="checkbox-item"><div class="box-square"></div> Locação Anual</div>
+            <div class="checkbox-item"><div class="box-square"></div> Dia Fixo Semanal</div>
+            <div class="checkbox-item"><div class="box-square"></div> Diária / Turno</div>
+          </div>
+
+          <div class="field-row">
+            <span class="field-label">Sala Indicada:</span>
+            <div class="field-line" style="flex:1;"></div>
+            <span class="field-label">Período / Dia:</span>
+            <div class="field-line" style="flex:1.4;"></div>
+          </div>
+
+          <div class="notes-box">
+            <div style="font-size:5.5pt; font-weight:700; color:var(--verde-salvia); text-transform:uppercase;">Condições Específicas / Vistoria:</div>
+            <div class="notes-line"></div>
+            <div class="notes-line"></div>
+            <div class="notes-line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="val-box">
+          <div class="val-left">
+            Investimento Proposto
+            <div style="font-size:5pt; font-weight:400; text-transform:none; color:var(--tinta-suave);">Condomínio, IPTU e Wi-Fi inclusos</div>
+          </div>
+          <div class="val-display">
+            <span>R$</span>
+            <div class="val-line"></div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <div class="footer-address">
+            <strong>Rua Dom Luiz Guanella, 2761</strong> · Capão da Canoa / RS<br>
+            Duas frentes (Guanella e Carajás) · Portaria facial · Elevadores
+          </div>
+          <div style="text-align:right;">
+            <strong>(51) 9827-0222</strong><br>
+            Mitzi Herter Brum
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARTÃO 4 (Inferior Direito) -->
+    <div class="card-unit">
+      <div class="card-inner-frame"></div>
+      <img src="logo/selo-bhalf.svg" class="marca-dagua-selo" alt="">
+
+      <div>
+        <div class="card-header">
+          <div class="brand-group">
+            <img src="logo/selo-bhalf.svg" class="brand-logo" alt="Selo">
+            <div>
+              <div class="brand-title">Bhalf Centro Integrativo</div>
+              <div class="brand-subtitle">Consultórios de Saúde, Estética e Movimento</div>
+            </div>
+          </div>
+          <div class="card-doc-type">
+            <span class="doc-badge">Orçamento</span>
+          </div>
+        </div>
+
+        <div class="pen-area">
+          <div class="field-row">
+            <span class="field-label">Profissional / Clínica:</span>
+            <div class="field-line"></div>
+          </div>
+
+          <div class="field-row">
+            <span class="field-label">Especialidade:</span>
+            <div class="field-line" style="flex:1.2;"></div>
+            <span class="field-label">Data:</span>
+            <div class="field-line" style="flex:0.8;"></div>
+          </div>
+
+          <div class="checkbox-group">
+            <div class="checkbox-item"><div class="box-square"></div> Locação Anual</div>
+            <div class="checkbox-item"><div class="box-square"></div> Dia Fixo Semanal</div>
+            <div class="checkbox-item"><div class="box-square"></div> Diária / Turno</div>
+          </div>
+
+          <div class="field-row">
+            <span class="field-label">Sala Indicada:</span>
+            <div class="field-line" style="flex:1;"></div>
+            <span class="field-label">Período / Dia:</span>
+            <div class="field-line" style="flex:1.4;"></div>
+          </div>
+
+          <div class="notes-box">
+            <div style="font-size:5.5pt; font-weight:700; color:var(--verde-salvia); text-transform:uppercase;">Condições Específicas / Vistoria:</div>
+            <div class="notes-line"></div>
+            <div class="notes-line"></div>
+            <div class="notes-line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="val-box">
+          <div class="val-left">
+            Investimento Proposto
+            <div style="font-size:5pt; font-weight:400; text-transform:none; color:var(--tinta-suave);">Condomínio, IPTU e Wi-Fi inclusos</div>
+          </div>
+          <div class="val-display">
+            <span>R$</span>
+            <div class="val-line"></div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <div class="footer-address">
+            <strong>Rua Dom Luiz Guanella, 2761</strong> · Capão da Canoa / RS<br>
+            Duas frentes (Guanella e Carajás) · Portaria facial · Elevadores
+          </div>
+          <div style="text-align:right;">
+            <strong>(51) 9827-0222</strong><br>
+            Mitzi Herter Brum
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

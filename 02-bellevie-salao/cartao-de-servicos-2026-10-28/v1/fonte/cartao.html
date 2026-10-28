@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Bellevie Beleza &amp; Estética: cartão de serviços</title>
+<style>
+@font-face { font-family: "Cormorant Garamond"; font-weight: 600; font-style: normal; src: url(fontes/cormorant-garamond-600-latin.woff2) format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-weight: 400; font-style: italic; src: url(fontes/cormorant-garamond-italic-400-latin.woff2) format("woff2"); }
+@font-face { font-family: "Jost"; font-weight: 400; font-style: normal; src: url(fontes/jost-400.ttf) format("truetype"); }
+@font-face { font-family: "Jost"; font-weight: 500; font-style: normal; src: url(fontes/jost-500.ttf) format("truetype"); }
+
+:root {
+  --creme: #FBF7F2;
+  --areia: #F3E9DC;
+  --ouro: #B8862F;
+  --ouro-escuro: #9E7C2E;
+  --cacau: #3A2A22;
+  --cacau-suave: #6B5A4E;
+}
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--creme); }
+body { font-family: "Jost", sans-serif; color: var(--cacau); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+.pagina {
+  position: relative; width: 210mm; height: 297mm; overflow: hidden;
+  background: var(--creme); break-after: page; padding: 16mm 18mm 0;
+}
+.pagina:last-child { break-after: auto; }
+/* moldura fina em ouro */
+.pagina::before {
+  content: ""; position: absolute; inset: 7mm; border: 0.25mm solid rgba(184,134,47,.45); pointer-events: none;
+}
+
+/* ---------- capa ---------- */
+.capa { display: flex; flex-direction: column; align-items: center; padding-top: 20mm; }
+.capa .logo { width: 44mm; }
+.arco {
+  position: relative; border-radius: 999px 999px 0 0; overflow: visible;
+}
+.arco img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 999px 999px 0 0; }
+.arco::after {
+  content: ""; position: absolute; inset: -3.2mm; border: 0.3mm solid var(--ouro);
+  border-radius: 999px 999px 0 0; border-bottom: none;
+}
+.capa .arco { width: 100mm; height: 132mm; margin-top: 12mm; }
+.capa .arco img { object-position: 50% 30%; }
+.capa h1 {
+  font-family: "Cormorant Garamond"; font-style: italic; font-weight: 400;
+  font-size: 34pt; color: var(--ouro-escuro); margin-top: 11mm; letter-spacing: .01em;
+}
+.capa .indice {
+  margin-top: 4mm; font-size: 8.5pt; letter-spacing: .32em; text-transform: uppercase; color: var(--cacau-suave);
+}
+.capa .indice span { color: var(--ouro); margin: 0 2.2mm; }
+
+/* ---------- miolo ---------- */
+.topo { display: flex; justify-content: center; }
+.topo img { width: 23mm; }
+
+.secao { margin-top: 9mm; }
+.secao-cab { display: flex; align-items: baseline; gap: 4mm; }
+.secao-cab .num { font-size: 8pt; letter-spacing: .3em; color: var(--ouro); font-weight: 500; }
+.secao-cab h2 {
+  font-family: "Cormorant Garamond"; font-weight: 600; font-size: 25pt; line-height: 1; color: var(--cacau);
+}
+.secao-cab::after { content: ""; flex: 1; height: 0.3mm; background: linear-gradient(90deg, var(--ouro), rgba(184,134,47,0)); align-self: center; margin-left: 2mm; }
+.secao .nota {
+  font-family: "Cormorant Garamond"; font-style: italic; font-size: 12.5pt; line-height: 1.35;
+  color: var(--cacau-suave); margin-top: 3mm; max-width: 150mm;
+}
+
+ul.lista { list-style: none; margin-top: 4.5mm; }
+ul.lista li {
+  display: flex; align-items: baseline; gap: 2.5mm; padding: 2.3mm 0;
+  border-bottom: 0.2mm solid rgba(184,134,47,.22);
+}
+ul.lista li:last-child { border-bottom: none; }
+.nome { font-size: 10.5pt; font-weight: 400; letter-spacing: .01em; }
+.nome small { display: block; font-size: 8pt; color: var(--cacau-suave); letter-spacing: .02em; margin-top: .4mm; }
+.lider { flex: 1; }
+.preco {
+  font-family: "Cormorant Garamond"; font-weight: 600; font-size: 15pt; color: var(--ouro-escuro);
+  white-space: nowrap; line-height: 1;
+}
+.preco i { font-family: "Jost"; font-style: normal; font-weight: 400; font-size: 7.5pt; letter-spacing: .08em; color: var(--ouro); margin-right: 1mm; }
+.preco .a { font-family: "Jost"; font-size: 8pt; color: var(--cacau-suave); margin: 0 1.5mm; }
+
+/* plano mensal em destaque */
+.plano {
+  margin-top: 5mm; background: var(--areia); padding: 4.5mm 6mm 2mm; position: relative;
+}
+.plano .rotulo { font-size: 7.5pt; letter-spacing: .32em; text-transform: uppercase; color: var(--ouro-escuro); font-weight: 500; }
+.plano ul.lista { margin-top: 1mm; }
+.plano ul.lista li { border-bottom-color: rgba(184,134,47,.3); }
+
+/* página com foto lateral */
+.duas { display: grid; grid-template-columns: 1fr 52mm; gap: 11mm; }
+.duas .arco { width: 52mm; height: 150mm; margin-top: 15mm; }
+.duas .arco img { object-position: 50% 60%; }
+.legenda { margin-top: 6mm; font-family: "Cormorant Garamond"; font-style: italic; font-size: 11pt; color: var(--cacau-suave); text-align: center; }
+
+/* marca d'água com o círculo da logo */
+.marca-dagua { position: absolute; width: 128mm; right: -30mm; bottom: 30mm; opacity: .09; pointer-events: none; }
+
+
+.convite {
+  position: absolute; left: 18mm; right: 18mm; bottom: 30mm; background: var(--areia);
+  padding: 9mm 10mm; display: flex; justify-content: space-between; align-items: center;
+}
+.convite p { font-family: "Cormorant Garamond"; font-style: italic; font-size: 19pt; color: var(--cacau); line-height: 1.15; }
+.convite .acao { text-align: right; }
+.convite .acao span { display: block; font-size: 7.5pt; letter-spacing: .32em; text-transform: uppercase; color: var(--ouro-escuro); font-weight: 500; }
+.convite .acao strong { display: block; font-family: "Cormorant Garamond"; font-weight: 600; font-size: 19pt; color: var(--cacau); margin-top: 1mm; }
+
+/* rodapé */
+.rodape {
+  position: absolute; left: 18mm; right: 18mm; bottom: 13mm;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  font-size: 8pt; letter-spacing: .06em; color: var(--cacau-suave);
+  border-top: 0.25mm solid rgba(184,134,47,.45); padding-top: 3mm;
+}
+.rodape strong { font-weight: 500; color: var(--cacau); letter-spacing: .08em; }
+.capa .rodape { justify-content: center; text-align: center; flex-direction: column; align-items: center; gap: 1.2mm; border-top: none; }
+.capa .rodape .agende { font-size: 8pt; letter-spacing: .32em; text-transform: uppercase; color: var(--ouro-escuro); font-weight: 500; }
+.capa .rodape .fone { font-family: "Cormorant Garamond"; font-weight: 600; font-size: 17pt; color: var(--cacau); letter-spacing: .02em; }
+</style>
+</head>
+<body>
+
+<!-- 1. Capa -->
+<section class="pagina capa">
+  <img class="logo" src="img/logo-transp.png" alt="Bellevie Beleza &amp; Estética">
+  <div class="arco"><img src="img/espaco.jpg" alt=""></div>
+  <h1>Cartão de serviços</h1>
+  <p class="indice">Cílios<span>·</span>Mãos e pés<span>·</span>Estética corporal</p>
+  <div class="rodape">
+    <span class="agende">Agende pelo WhatsApp</span>
+    <span class="fone">(51) 9325-1108</span>
+    <span>Rua Dom Luiz Guanella, 2761 · Capão da Canoa</span>
+  </div>
+</section>
+
+<!-- 2. Cílios e corporais -->
+<section class="pagina">
+  <img class="marca-dagua" src="img/circulo-transp.png" alt="">
+  <div class="topo"><img src="img/logo-transp.png" alt="Bellevie"></div>
+
+  <div class="secao">
+    <div class="secao-cab"><span class="num">01</span><h2>Cílios</h2></div>
+    <ul class="lista">
+      <li><span class="nome">Remoção de extensão de cílios</span><span class="lider"></span><span class="preco"><i>R$</i>60</span></li>
+      <li><span class="nome">Manutenção de cílios naturais</span><span class="lider"></span><span class="preco"><i>R$</i>90</span></li>
+      <li><span class="nome">Manutenção de cílios extra volume</span><span class="lider"></span><span class="preco"><i>R$</i>110</span></li>
+      <li><span class="nome">Lash lifting</span><span class="lider"></span><span class="preco"><i>R$</i>150</span></li>
+      <li><span class="nome">Brow lamination</span><span class="lider"></span><span class="preco"><i>R$</i>150</span></li>
+      <li><span class="nome">Colocação de extensão de cílios naturais</span><span class="lider"></span><span class="preco"><i>R$</i>180</span></li>
+      <li><span class="nome">Colocação de cílios extra volume</span><span class="lider"></span><span class="preco"><i>R$</i>200</span></li>
+    </ul>
+  </div>
+
+  <div class="secao">
+    <div class="secao-cab"><span class="num">02</span><h2>Corporais</h2></div>
+    <ul class="lista">
+      <li><span class="nome">Drenagem pós-operatória</span><span class="lider"></span><span class="preco"><i>R$</i>180</span></li>
+      <li><span class="nome">Massagem relaxante, terapêutica ou modeladora</span><span class="lider"></span><span class="preco"><i>R$</i>138<span class="a">a</span><i>R$</i>180</span></li>
+    </ul>
+  </div>
+
+  <div class="convite">
+    <p>O seu cuidado,<br>no seu horário.</p>
+    <div class="acao"><span>Agende pelo WhatsApp</span><strong>(51) 9325-1108</strong></div>
+  </div>
+
+  <div class="rodape"><span><strong>Bellevie</strong> · Beleza &amp; Estética</span><span>Rua Dom Luiz Guanella, 2761 · Capão da Canoa · WhatsApp (51) 9325-1108</span></div>
+</section>
+
+<!-- 3. Mãos e pés -->
+<section class="pagina">
+  <div class="topo"><img src="img/logo-transp.png" alt="Bellevie"></div>
+  <div class="duas">
+    <div>
+      <div class="secao">
+        <div class="secao-cab"><span class="num">03</span><h2>Manicure e pedicure</h2></div>
+        <ul class="lista">
+          <li><span class="nome">Manicure tradicional</span><span class="lider"></span><span class="preco"><i>R$</i>40</span></li>
+          <li><span class="nome">Pedicure tradicional</span><span class="lider"></span><span class="preco"><i>R$</i>60</span></li>
+          <li><span class="nome">Pedicure + spa dos pés</span><span class="lider"></span><span class="preco"><i>R$</i>80</span></li>
+          <li><span class="nome">Esmaltação infantil</span><span class="lider"></span><span class="preco"><i>R$</i>30</span></li>
+          <li><span class="nome">Desencravar pés</span><span class="lider"></span><span class="preco"><i>R$</i>80</span></li>
+          <li><span class="nome">Plástica dos pés</span><span class="lider"></span><span class="preco"><i>R$</i>150</span></li>
+        </ul>
+        <div class="plano">
+          <p class="rotulo">Plano mensal</p>
+          <ul class="lista">
+            <li><span class="nome">4 manicures + 1 pedicure</span><span class="lider"></span><span class="preco"><i>R$</i>198</span></li>
+            <li><span class="nome">4 manicures + 2 pedicures</span><span class="lider"></span><span class="preco"><i>R$</i>252</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="secao">
+        <div class="secao-cab"><span class="num">04</span><h2>Alongamento e gel</h2></div>
+        <ul class="lista">
+          <li><span class="nome">Alongamento em fibra</span><span class="lider"></span><span class="preco"><i>R$</i>240</span></li>
+          <li><span class="nome">Manutenção de alongamento</span><span class="lider"></span><span class="preco"><i>R$</i>180</span></li>
+          <li><span class="nome">Alongamento avulso por unha</span><span class="lider"></span><span class="preco"><i>R$</i>25</span></li>
+          <li><span class="nome">Remoção de unha de fibra</span><span class="lider"></span><span class="preco"><i>R$</i>50</span></li>
+          <li><span class="nome">Esmaltação em gel nas mãos</span><span class="lider"></span><span class="preco"><i>R$</i>90</span></li>
+          <li><span class="nome">Esmaltação em gel nos pés</span><span class="lider"></span><span class="preco"><i>R$</i>100</span></li>
+          <li><span class="nome">Banho de gel</span><span class="lider"></span><span class="preco"><i>R$</i>140</span></li>
+          <li><span class="nome">Remoção de esmaltação em gel</span><span class="lider"></span><span class="preco"><i>R$</i>20</span></li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="arco"><img src="img/spa-pes.jpg" alt="Spa dos pés na Bellevie"></div>
+    </div>
+  </div>
+  <div class="rodape"><span><strong>Bellevie</strong> · Beleza &amp; Estética</span><span>Rua Dom Luiz Guanella, 2761 · Capão da Canoa · WhatsApp (51) 9325-1108</span></div>
+</section>
+
+<!-- 4. Radiofrequência e nutricionista -->
+<section class="pagina">
+  <img class="marca-dagua" src="img/circulo-transp.png" alt="">
+  <div class="topo"><img src="img/logo-transp.png" alt="Bellevie"></div>
+
+  <div class="secao">
+    <div class="secao-cab"><span class="num">05</span><h2>Radiofrequência</h2></div>
+    <p class="nota">Promove aquecimento controlado dos tecidos, estimulando colágeno e elastina. Reduz flacidez, melhora a firmeza e realça o contorno corporal e facial.</p>
+    <ul class="lista">
+      <li><span class="nome">Colo</span><span class="lider"></span><span class="preco"><i>R$</i>250</span></li>
+      <li><span class="nome">Abdômen</span><span class="lider"></span><span class="preco"><i>R$</i>320</span></li>
+      <li><span class="nome">Bananinha<small>Dobra inferior dos glúteos</small></span><span class="lider"></span><span class="preco"><i>R$</i>220</span></li>
+      <li><span class="nome">Braços</span><span class="lider"></span><span class="preco"><i>R$</i>280</span></li>
+      <li><span class="nome">Flancos</span><span class="lider"></span><span class="preco"><i>R$</i>320</span></li>
+      <li><span class="nome">Glúteos</span><span class="lider"></span><span class="preco"><i>R$</i>350</span></li>
+      <li><span class="nome">Interno de coxa</span><span class="lider"></span><span class="preco"><i>R$</i>320</span></li>
+      <li><span class="nome">Monte de Vênus</span><span class="lider"></span><span class="preco"><i>R$</i>250</span></li>
+      <li><span class="nome">Facial</span><span class="lider"></span><span class="preco"><i>R$</i>280</span></li>
+      <li><span class="nome">Papada</span><span class="lider"></span><span class="preco"><i>R$</i>220</span></li>
+      <li><span class="nome">Pescoço</span><span class="lider"></span><span class="preco"><i>R$</i>250</span></li>
+    </ul>
+  </div>
+
+  <div class="secao">
+    <div class="secao-cab"><span class="num">06</span><h2>Nutricionista</h2></div>
+    <ul class="lista">
+      <li><span class="nome">Consulta nutricional</span><span class="lider"></span><span class="preco"><i>R$</i>400</span></li>
+    </ul>
+  </div>
+
+  <div class="rodape"><span><strong>Bellevie</strong> · Beleza &amp; Estética</span><span>Rua Dom Luiz Guanella, 2761 · Capão da Canoa · WhatsApp (51) 9325-1108</span></div>
+</section>
+
+</body>
+</html>

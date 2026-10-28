@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bellevie Beleza & Estética · Cartão de Orçamento & Menu de Procedimentos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --creme: #FBF7F2;
+      --areia: #F3E9DC;
+      --areia-clara: #F9F4ED;
+      --ouro: #B8862F;
+      --ouro-escuro: #9E7C2E;
+      --cacau: #3A2A22;
+      --cacau-medio: #5A473E;
+      --border-subtle: rgba(184, 134, 47, 0.2);
+      --border-ouro: rgba(184, 134, 47, 0.45);
+      --wa-green: #25D366;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @page {
+      size: A4 portrait;
+      margin: 12mm;
+    }
+
+    body {
+      background-color: var(--creme);
+      color: var(--cacau);
+      font-family: 'Jost', sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding: 32px 16px;
+    }
+
+    .orcamento-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(58, 42, 34, 0.08);
+      position: relative;
+    }
+
+    /* Header */
+    .orcamento-header {
+      background: var(--areia);
+      padding: 40px 36px 32px 36px;
+      border-bottom: 1.5px solid var(--ouro);
+      position: relative;
+    }
+
+    .header-topo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-container img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--ouro);
+    }
+
+    .rotulo-tag {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ouro-escuro);
+    }
+
+    .orcamento-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px;
+      font-weight: 600;
+      color: var(--cacau);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .orcamento-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 19px;
+      color: var(--cacau-medio);
+      margin-bottom: 16px;
+    }
+
+    .orcamento-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 12.5px;
+      color: var(--cacau-medio);
+    }
+
+    /* Corpo */
+    .orcamento-body {
+      padding: 36px;
+    }
+
+    .categoria-bloco {
+      margin-bottom: 32px;
+    }
+
+    .categoria-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+
+    .categoria-nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--cacau);
+    }
+
+    .categoria-badge {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--ouro-escuro);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* Grid de Itens */
+    .itens-lista {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .item-linha {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 6px 0;
+      border-bottom: 0.5px dashed rgba(184, 134, 47, 0.25);
+    }
+
+    .item-linha:last-child {
+      border-bottom: none;
+    }
+
+    .item-info {
+      flex: 1;
+      padding-right: 20px;
+    }
+
+    .item-nome {
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--cacau);
+    }
+
+    .item-desc {
+      font-size: 12px;
+      color: var(--cacau-medio);
+      margin-top: 2px;
+    }
+
+    .item-preco {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--ouro-escuro);
+      white-space: nowrap;
+    }
+
+    .item-preco small {
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--cacau-medio);
+      margin-left: 2px;
+    }
+
+    /* Destaques de Tecnologia */
+    .diferenciais-caixa {
+      background: var(--areia-clara);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+    }
+
+    .diferenciais-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 700px) {
+      .diferenciais-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .dif-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .dif-card h5 {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ouro-escuro);
+      margin-bottom: 4px;
+    }
+
+    .dif-card p {
+      font-size: 11.5px;
+      color: var(--cacau-medio);
+      line-height: 1.4;
+    }
+
+    /* CTA Box */
+    .cta-box {
+      background: var(--areia);
+      border: 1px solid var(--ouro);
+      border-radius: 18px;
+      padding: 24px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .cta-text h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--cacau);
+      margin-bottom: 4px;
+    }
+
+    .cta-text p {
+      font-size: 13px;
+      color: var(--cacau-medio);
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--ouro);
+      color: #FFFFFF;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 13.5px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .cta-btn:hover {
+      background: var(--ouro-escuro);
+    }
+
+    /* Footer */
+    .orcamento-footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 16px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+      color: var(--cacau-medio);
+    }
+
+    @media print {
+      body { background: transparent; padding: 0; }
+      .orcamento-wrapper { border: none; box-shadow: none; max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="orcamento-wrapper">
+
+    <!-- Header -->
+    <header class="orcamento-header">
+      <div class="header-topo">
+        <div class="logo-container">
+          <img src="logo-atual/logo-bellevie-salao-480.jpg" alt="Logo Bellevie">
+          <div>
+            <div class="rotulo-tag">Bellevie Beleza & Estética</div>
+            <div style="font-size:12px; color:var(--cacau-medio);">No Centro Integrativo Bhalf</div>
+          </div>
+        </div>
+        <span class="rotulo-tag" style="background:#fff; padding:4px 10px; border-radius:8px; border:1px solid var(--border-subtle);">Tabela 2026/2027</span>
+      </div>
+
+      <h1 class="orcamento-title">Cartão de Orçamento & Menu de Cuidados</h1>
+      <p class="orcamento-sub">O cuidado perto da sua casa com tecnologia de clínica</p>
+
+      <div class="orcamento-meta">
+        <span>📍 Rua Dom Luiz Guanella, 2761, Girassol, Capão da Canoa</span>
+        <span>📱 WhatsApp: +55 51 9325-1108 (Sistema Zelo)</span>
+      </div>
+    </header>
+
+    <!-- Corpo -->
+    <main class="orcamento-body">
+
+      <!-- Categoria 1: Cabelos e Couro Cabeludo -->
+      <section class="categoria-bloco">
+        <div class="categoria-header">
+          <h2 class="categoria-nome">Cabelos & Tratamentos</h2>
+          <span class="categoria-badge">Equipe Especialista · Luiza Consul</span>
+        </div>
+        
+        <div class="itens-lista">
+          <div class="item-linha">
+            <div class="item-info">
+              <div class="item-nome">Lavatório com Massagem & Vapor de Ozônio</div>
+              <div class="item-desc">Lavagem relaxante na cadeira que faz massagem, associada ao vapor de ozônio para desobstrução e nutrição profunda dos fios.</div>
+            </div>
+            <div class="item-preco">R$ 130 <small>a</small> 180</div>
+          </div>
+
+          <div class="item-linha">
+            <div class="item-info">
+              <div class="item-nome">Corte Feminino & Escova Modelada</div>
+              <div class="item-desc">Visagismo e corte com Luiza Consul ou especialistas da casa, com finalização profissional.</div>
+            </div>
+            <div class="item-preco">R$ 140 <small>a</small> 190</div>
+          </div>
+
+          <div class="item-linha">
+            <div class="item-info">
+              <div class="item-nome">Mechas, Luzes & Morena Iluminada</div>
+              <div class="item-desc">Técnica de clareamento preservando a saúde da fibra capilar com teste de mecha prévio e reconstrução imediata.</div>
+            </div>
+            <div class="item-preco">a partir de R$ 380</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Categoria 2: Unhas e Spa dos Pés -->
+      <section class="categoria-bloco">
+        <div class="categoria-header">
+          <h2 class="categoria-nome">Unhas & Spa dos Pés</h2>
+          <span class="categoria-badge">Biossegurança Rigorosa</span>
+        </div>
+
+        <div class="itens-lista">
+          <div class="item-linha">
+            <div class="item-info">
+              <div class="item-nome">Spa dos Pés com Banheira de Hidromassagem</div>
+              <div class="item-desc">Imersão em água morna com hidromassagem, esfoliação com sais relaxantes, hidratação profunda e massagem podal.</div>
+            </div>
+            <div class="item-preco">R$ 110 <small>a</small> 130</div>
+          </div>
+
+          <div class="item-linha">
+            <div class="item-info">
+              <div class="item-nome">Manicure & Pedicure Clássica</div>
+              <div class="item-desc">Cuticulagem perfeita, materiais 100% esterilizados em autoclave e esmaltação de longa duração.</div>
+            </div>
+            <div class="item-preco">R$ 85</div>
+          </div>
+
+          <div class="item-linha">
+            <div class="item-info">
+              <div class="item-nome">Alongamento em Gel & Banho de Gel</div>
+              <div class="item-desc">Estrutura resistente com acabamento natural e delicado. Manutenção em dia para preservar as unhas naturais.</div>
+            </div>
+            <div class="item-preco">R$ 160 <small>a</small> 220</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Categoria 3: Estética Facial e Corporal -->
+      <section class="categoria-bloco">
+        <div class="categoria-header">
+          <h2 class="categoria-nome">Estética Avançada & Olhar</h2>
+          <span class="categoria-badge">Tecnologia Clínica</span>
+        </div>
+
+        <div class="itens-lista">
+          <div class="item-linha">
+            <div class="item-info">
+              <div class="item-nome">UltraMed (Lipo Sem Cortes / Ultrassom Microfocado)</div>
+              <div class="item-desc">Tecnologia avançada para quebra de gordura localizada e combate à flacidez sem tempo de recuperação.</div>
+            </div>
+            <div class="item-preco">Sob Consulta <small>/ avaliação</small></div>
+          </div>
+
+          <div class="item-linha">
+            <div class="item-info">
+              <div class="item-nome">Radiofrequência Facial (Estímulo de Colágeno)</div>
+              <div class="item-desc">Efeito lifting não invasivo para rejuvenescimento e melhora do contorno facial.</div>
+            </div>
+            <div class="item-preco">R$ 160 <small>/sessão</small></div>
+          </div>
+
+          <div class="item-linha">
+            <div class="item-info">
+              <div class="item-nome">Extensão de Cílios & Lash Design</div>
+              <div class="item-desc">Técnicas Fio a Fio ou Volume Russo com isolamento seguro e fios ultra-leves (Joberta Maciel).</div>
+            </div>
+            <div class="item-preco">R$ 160 <small>a</small> 210</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Diferenciais em Box -->
+      <div class="diferenciais-caixa">
+        <div class="rotulo-tag">O Padrão de Cuidado Bellevie</div>
+        <div class="diferenciais-grid">
+          <div class="dif-card">
+            <h5>🔬 Biossegurança Total</h5>
+            <p>Escovas e ferramentas esterilizadas rigorosamente antes de cada atendimento.</p>
+          </div>
+          <div class="dif-card">
+            <h5>☕ Conforto & Espera</h5>
+            <p>Pátio gourmet e café no complexo Bhalf para você relaxar sem correria.</p>
+          </div>
+          <div class="dif-card">
+            <h5>👩‍💼 Atendimento Personalizado</h5>
+            <p>Agenda pontual gerenciada com zelo para garantir a sua tranquilidade.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-box">
+        <div class="cta-text">
+          <h4>Pronta para o seu momento de cuidado?</h4>
+          <p>Consulte a disponibilidade de horários da equipe no WhatsApp oficial.</p>
+        </div>
+        <a href="https://wa.me/555193251108?text=Oi!%20Vi%20o%20cartão%20de%20orçamento%20do%20Bellevie%20e%20quero%20agendar%20um%20horário" class="cta-btn" target="_blank">
+          <span>Agendar Horário no WhatsApp</span>
+          <span>➔</span>
+        </a>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="orcamento-footer">
+      <div>Bellevie Beleza & Estética · Sistema Zelo · Capão da Canoa / RS</div>
+      <div>Valores de referência para a temporada 2026/2027</div>
+    </footer>
+
+  </div>
+
+</body>
+</html>

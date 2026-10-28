@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bellevie Estúdio · Cartão de Planos & Orçamento</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #15171A;
+      --bg-surface: #1C1F24;
+      --bg-card: #22262C;
+      --bg-card-highlight: #282D35;
+      --brand-orange: #FF6A2B;
+      --brand-orange-hover: #E8581A;
+      --brand-offwhite: #F4F1EA;
+      --brand-gray: #8A8F98;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-active: rgba(255, 106, 43, 0.45);
+      --wa-green: #25D366;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @page {
+      size: A4 portrait;
+      margin: 12mm;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--brand-offwhite);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding: 32px 16px;
+    }
+
+    .orcamento-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+      position: relative;
+    }
+
+    /* Header */
+    .orcamento-header {
+      background: linear-gradient(135deg, rgba(21, 23, 26, 0.95) 0%, rgba(28, 31, 36, 0.98) 100%),
+                  url('fotos/bellevie-estudio-sala-musculacao-4k.jpg') center/cover no-repeat;
+      padding: 44px 36px 36px 36px;
+      border-bottom: 2px solid var(--brand-orange);
+      position: relative;
+    }
+
+    .header-topo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .b-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--brand-orange);
+      color: var(--bg-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+    }
+
+    .header-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--brand-orange);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: rgba(255, 106, 43, 0.15);
+      border: 1px solid rgba(255, 106, 43, 0.3);
+      padding: 4px 12px;
+      border-radius: 8px;
+    }
+
+    .orcamento-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 38px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      color: #FFFFFF;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .orcamento-title span {
+      color: var(--brand-orange);
+    }
+
+    .orcamento-sub {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--brand-offwhite);
+      margin-bottom: 20px;
+    }
+
+    .orcamento-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 12.5px;
+      color: var(--brand-gray);
+    }
+
+    /* Corpo */
+    .orcamento-body {
+      padding: 36px;
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--brand-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .section-heading {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+
+    /* Grid de Planos */
+    .planos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 36px;
+    }
+
+    @media (max-width: 800px) {
+      .planos-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .plano-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .plano-card.destaque {
+      background: var(--bg-card-highlight);
+      border-color: var(--brand-orange);
+      box-shadow: 0 0 28px rgba(255, 106, 43, 0.16);
+    }
+
+    .plano-badge-topo {
+      position: absolute;
+      top: -11px;
+      right: 14px;
+      background: var(--brand-orange);
+      color: var(--bg-dark);
+      font-family: 'Unbounded', sans-serif;
+      font-size: 9px;
+      font-weight: 900;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+    .plano-nome {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .plano-desc {
+      font-size: 12px;
+      color: var(--brand-gray);
+      margin-bottom: 18px;
+      line-height: 1.4;
+      min-height: 38px;
+    }
+
+    .plano-preco-box {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 14px;
+      margin-top: auto;
+    }
+
+    .plano-preco-label {
+      font-size: 10.5px;
+      color: var(--brand-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .plano-preco {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      color: #fff;
+      margin-top: 2px;
+    }
+
+    .plano-preco.orange {
+      color: var(--brand-orange);
+    }
+
+    .plano-preco small {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--brand-gray);
+    }
+
+    /* Modalidades Incluídas */
+    .modalidades-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 36px;
+    }
+
+    .mod-pills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .mod-pill-tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--brand-offwhite);
+    }
+
+    .mod-pill-tag.destaque-pill {
+      border-color: var(--brand-orange);
+      color: var(--brand-orange);
+      background: rgba(255, 106, 43, 0.1);
+    }
+
+    /* CTA Box */
+    .cta-box {
+      background: linear-gradient(135deg, #1C1F24 0%, #252A32 100%);
+      border: 1.5px solid var(--brand-orange);
+      border-radius: 18px;
+      padding: 26px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .cta-text h4 {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .cta-text p {
+      font-size: 13px;
+      color: var(--brand-gray);
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--brand-orange);
+      color: var(--bg-dark);
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: 13.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .cta-btn:hover {
+      background: var(--brand-orange-hover);
+    }
+
+    /* Footer */
+    .orcamento-footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 18px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+      color: var(--brand-gray);
+    }
+
+    @media print {
+      body { background: transparent; padding: 0; color: #000; }
+      .orcamento-wrapper { border: 1px solid #999; box-shadow: none; max-width: 100%; }
+      .cta-btn { background: #000; color: #fff; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="orcamento-wrapper">
+
+    <!-- Header -->
+    <header class="orcamento-header">
+      <div class="header-topo">
+        <div class="logo-container">
+          <div class="b-icon">B</div>
+          <div>
+            <div style="font-family:'Unbounded'; font-weight:800; font-size:15px; letter-spacing:-0.02em;">BELLEVIE ESTÚDIO</div>
+            <div style="font-size:11.5px; color:var(--brand-gray);">No Centro Integrativo Bhalf</div>
+          </div>
+        </div>
+        <div class="header-tag">Temporada 2026/2027</div>
+      </div>
+
+      <h1 class="orcamento-title">Cartão de Planos & <span>Orçamento</span></h1>
+      <p class="orcamento-sub">Corpo forte, mente leve, vida plena · +10 modalidades em um só lugar</p>
+
+      <div class="orcamento-meta">
+        <span>📍 Rua Dom Luiz Guanella, 2761, Capão da Canoa / RS</span>
+        <span>⚡ Direção: Rebranding Pulso</span>
+        <span>🔥 Sem taxa de matrícula</span>
+      </div>
+    </header>
+
+    <!-- Corpo -->
+    <main class="orcamento-body">
+
+      <span class="section-label">Opções de Entrada e Frequência</span>
+      <h2 class="section-heading">Escolha o Seu Ritmo de Treino</h2>
+
+      <!-- Grid de Planos -->
+      <div class="planos-grid">
+
+        <!-- 1. Aula Experimental -->
+        <div class="plano-card">
+          <div>
+            <div class="plano-nome">Aula Experimental</div>
+            <div class="plano-desc">Sua primeira experiência prática para conhecer a energia da sala, a música e o professor.</div>
+          </div>
+          <div class="plano-preco-box">
+            <div class="plano-preco-label">Porta de Entrada</div>
+            <div class="plano-preco">R$ 35 <small>ou cortesia</small></div>
+            <div style="font-size:11px; color:var(--brand-orange); margin-top:4px;">100% revertida ao fechar plano</div>
+          </div>
+        </div>
+
+        <!-- 2. Plano Livre Multimodalidade -->
+        <div class="plano-card destaque">
+          <span class="plano-badge-topo">Mais Escolhido</span>
+          <div>
+            <div class="plano-nome">Livre Multimodalidade</div>
+            <div class="plano-desc">Acesso ilimitado a todas as +10 modalidades da grade. Treine no seu horário e varie quando quiser.</div>
+          </div>
+          <div class="plano-preco-box">
+            <div class="plano-preco-label">Mensalidade sem fidelidade</div>
+            <div class="plano-preco orange">R$ 280 <small>/mês</small></div>
+            <div style="font-size:11px; color:var(--brand-offwhite); margin-top:4px;">Aulas livres em toda a grade semanal</div>
+          </div>
+        </div>
+
+        <!-- 3. Plano 2x ou 3x Semana -->
+        <div class="plano-card">
+          <div>
+            <div class="plano-nome">Frequência Fixa</div>
+            <div class="plano-desc">Ideal para conciliar com a rotina de trabalho. Escolha 2 ou 3 dias na semana na modalidade de sua preferência.</div>
+          </div>
+          <div class="plano-preco-box">
+            <div class="plano-preco-label">Plano 2x a 3x na semana</div>
+            <div class="plano-preco">R$ 190 <small>a</small> 240 <small>/mês</small></div>
+            <div style="font-size:11px; color:var(--brand-gray); margin-top:4px;">Grade de horários garantida</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modalidades Inclusas -->
+      <div class="modalidades-box">
+        <span class="section-label">O Que Você Pode Fazer Aqui</span>
+        <h3 style="font-family:'Unbounded'; font-size:15px; font-weight:800; color:#fff; text-transform:uppercase;">+10 Modalidades em um Só Lugar</h3>
+
+        <div class="mod-pills-list">
+          <span class="mod-pill-tag destaque-pill">🔥 Bungee Workout</span>
+          <span class="mod-pill-tag destaque-pill">🚴 Spinning / Bike Indoor</span>
+          <span class="mod-pill-tag destaque-pill">💃 Ritmos & Dança Cigana</span>
+          <span class="mod-pill-tag">🧘 Pilates Solo</span>
+          <span class="mod-pill-tag">✨ Yoga & Respiração</span>
+          <span class="mod-pill-tag">💪 TNMI 50+ (Longevidade)</span>
+          <span class="mod-pill-tag">🏋️ Funcional & Força</span>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-box">
+        <div class="cta-text">
+          <h4>Pronto para sentir a energia da turma?</h4>
+          <p>Consulte a grade de horários desta semana e marque a sua aula experimental.</p>
+        </div>
+        <a href="https://wa.me/555198270222?text=Oi!%20Vi%20o%20cartão%20de%20orçamento%20do%20Bellevie%20Estúdio%20e%20quero%20marcar%20minha%20aula%20experimental" class="cta-btn" target="_blank">
+          <span>Agendar Aula no WhatsApp</span>
+          <span>➔</span>
+        </a>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="orcamento-footer">
+      <div>Bellevie Estúdio · Centro Integrativo Bhalf · Capão da Canoa / RS</div>
+      <div>Valores e condições sujeitos a alteração por turma</div>
+    </footer>
+
+  </div>
+
+</body>
+</html>

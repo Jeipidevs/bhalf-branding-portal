@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bhalf Centro Integrativo · Cartão de Orçamento de Consultórios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Figtree:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0f1714;
+      --bg-surface: #141d18;
+      --bg-card: #18231d;
+      --bg-card-highlight: #1d2a23;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-active: rgba(169, 196, 166, 0.35);
+      --salvia: #6f8f72;
+      --salvia-clara: #a9c4a6;
+      --creme: #f3f5f1;
+      --creme-quente: #f3ebe1;
+      --branco: #ffffff;
+      --wa-green: #25D366;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @page {
+      size: A4 portrait;
+      margin: 12mm;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--creme);
+      font-family: 'Figtree', sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding: 32px 16px;
+    }
+
+    .orcamento-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+      position: relative;
+    }
+
+    /* Header com foto real do prédio */
+    .orcamento-header {
+      position: relative;
+      background: linear-gradient(180deg, rgba(20, 29, 24, 0.45) 0%, rgba(15, 23, 20, 0.95) 100%),
+                  url('logo/foto-de-perfil-letreiro.jpg') center/cover no-repeat;
+      padding: 44px 36px 36px 36px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .pilula-topo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(20, 29, 24, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--salvia-clara);
+      padding: 5px 14px;
+      border-radius: 30px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--salvia-clara);
+      margin-bottom: 16px;
+    }
+
+    .orcamento-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 36px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.035em;
+      color: var(--branco);
+      margin-bottom: 6px;
+      line-height: 1.1;
+    }
+
+    .orcamento-sub {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 20px;
+      color: var(--creme-quente);
+      margin-bottom: 18px;
+    }
+
+    .orcamento-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .orcamento-meta span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Corpo */
+    .orcamento-body {
+      padding: 36px;
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--salvia-clara);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .section-heading {
+      font-family: 'Archivo', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--branco);
+      margin-bottom: 20px;
+    }
+
+    /* Cards de Modalidade */
+    .modalidades-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    @media (max-width: 800px) {
+      .modalidades-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .mod-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .mod-card.destaque {
+      border-color: var(--salvia-clara);
+      background: var(--bg-card-highlight);
+      box-shadow: 0 0 24px rgba(169, 196, 166, 0.12);
+    }
+
+    .mod-tag {
+      position: absolute;
+      top: -10px;
+      right: 14px;
+      background: var(--salvia);
+      color: #fff;
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .mod-nome {
+      font-family: 'Archivo', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .mod-desc {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 16px;
+      min-height: 36px;
+    }
+
+    .mod-preco-box {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 12px;
+      margin-top: auto;
+    }
+
+    .mod-preco-label {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .mod-preco {
+      font-family: 'Archivo', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--salvia-clara);
+    }
+
+    .mod-preco small {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* O que está incluso */
+    .incluso-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 36px;
+    }
+
+    .incluso-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px 20px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .incluso-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .incluso-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .incluso-item .check {
+      color: var(--salvia-clara);
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    /* Call to Action WhatsApp */
+    .cta-box {
+      background: linear-gradient(135deg, rgba(29, 42, 35, 0.8) 0%, rgba(20, 29, 24, 0.95) 100%);
+      border: 1px solid var(--salvia-clara);
+      border-radius: 16px;
+      padding: 24px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .cta-text h4 {
+      font-family: 'Archivo', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .cta-text p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--wa-green);
+      color: #0b1c11;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .cta-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* Footer */
+    .orcamento-footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 18px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    @media print {
+      body { background: transparent; padding: 0; color: #000; }
+      .orcamento-wrapper { border: 1px solid #ccc; box-shadow: none; max-width: 100%; }
+      .cta-btn { background: #000; color: #fff; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="orcamento-wrapper">
+
+    <!-- Header -->
+    <header class="orcamento-header">
+      <div class="pilula-topo">
+        <img src="logo/selo-bhalf.svg" width="14" height="14" alt="Selo">
+        Bhalf Centro Integrativo · Tabela de Ocupação
+      </div>
+      <h1 class="orcamento-title">Cartão de Orçamento de Consultórios</h1>
+      <p class="orcamento-sub">Seu endereço de saúde, estética e movimento em Capão da Canoa</p>
+      
+      <div class="orcamento-meta">
+        <span>📍 <strong>Frente:</strong> Rua Dom Luiz Guanella, 2761, Capão da Canoa</span>
+        <span>🚪 <strong>Fundos:</strong> Rua Carajás, 130</span>
+        <span>📅 <strong>Validade:</strong> Temporada 2026/2027</span>
+      </div>
+    </header>
+
+    <!-- Corpo -->
+    <main class="orcamento-body">
+
+      <span class="section-label">Opção 01 · Modelos de Locação</span>
+      <h2 class="section-heading">Escolha o Melhor Formato para Seu Atendimento</h2>
+
+      <div class="modalidades-grid">
+        
+        <!-- Modelo A (Foco) -->
+        <div class="mod-card destaque">
+          <span class="mod-tag">Foco Principal</span>
+          <div>
+            <div class="mod-nome">A. Locação Anual</div>
+            <div class="mod-desc">Consultório exclusivo. Sua chave, seus horários e sua placa na porta. Atendimento livre 24/7.</div>
+          </div>
+          <div class="mod-preco-box">
+            <div class="mod-preco-label">Investimento Mensal</div>
+            <div class="mod-preco">Sob Consulta <small>/ com visita</small></div>
+            <div style="font-size:11px; color:var(--salvia-clara); margin-top:4px;">Faixa média: R$ 1.800 a R$ 2.800/mês</div>
+          </div>
+        </div>
+
+        <!-- Modelo B -->
+        <div class="mod-card">
+          <div>
+            <div class="mod-nome">B. Dia Fixo na Semana</div>
+            <div class="mod-desc">A mesma sala garantida toda semana (ex: todas as terças-feiras no mês). Mobiliada e pronta.</div>
+          </div>
+          <div class="mod-preco-box">
+            <div class="mod-preco-label">Pacote Mensal</div>
+            <div class="mod-preco">A partir de R$ 520 <small>/mês</small></div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px;">Equivale a 4 dias completos no mês</div>
+          </div>
+        </div>
+
+        <!-- Modelo C -->
+        <div class="mod-card">
+          <div>
+            <div class="mod-nome">C. Diária ou Turno</div>
+            <div class="mod-desc">Pague apenas pelo período que atende. Ideal para profissionais de fora ou atendimento sazonal.</div>
+          </div>
+          <div class="mod-preco-box">
+            <div class="mod-preco-label">Turno ou Diária Avulsa</div>
+            <div class="mod-preco">R$ 100 a R$ 180 <small>/período</small></div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px;">Turno (manhã/tarde) ou dia inteiro</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- O que está incluso -->
+      <div class="incluso-box">
+        <span class="section-label">Infraestrutura Inclusa</span>
+        <h3 style="font-family:'Archivo'; font-size:17px; font-weight:800; color:#fff; text-transform:uppercase;">Tudo Pronto para Você Começar a Atender</h3>
+
+        <div class="incluso-grid">
+          <div class="incluso-item">
+            <span class="check">✔</span>
+            <span><strong>Portaria com Reconhecimento Facial</strong> nas duas entradas (Guanella e Carajás).</span>
+          </div>
+          <div class="incluso-item">
+            <span class="check">✔</span>
+            <span><strong>Dois Elevadores</strong> de acesso rápido até o piso superior.</span>
+          </div>
+          <div class="incluso-item">
+            <span class="check">✔</span>
+            <span><strong>Pátio e Espaço Gourmet</strong> com cafeteria e bistrô para espera acolhedora de pacientes.</span>
+          </div>
+          <div class="incluso-item">
+            <span class="check">✔</span>
+            <span><strong>Zero Preocupação com Contas:</strong> Condomínio, IPTU, água, luz e Wi-Fi inclusos.</span>
+          </div>
+          <div class="incluso-item">
+            <span class="check">✔</span>
+            <span><strong>Vizinhança que Gera Fluxo:</strong> Mais de 10 operações médicas, estéticas e fitness trazendo clientes diariamente.</span>
+          </div>
+          <div class="incluso-item">
+            <span class="check">✔</span>
+            <span><strong>Localização Central Privilegiada:</strong> Bairro Girassol, próximo ao Hospital e farmácias.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-box">
+        <div class="cta-text">
+          <h4>Quer conhecer as salas livres hoje?</h4>
+          <p>Agende uma visita técnica presencial com a Mitzi e escolha o consultório ideal para sua especialidade.</p>
+        </div>
+        <a href="https://wa.me/555198270222?text=Oi%20Mitzi,%20vi%20o%20cartão%20de%20orçamento%20da%20Bhalf%20e%20quero%20agendar%20uma%20visita" class="cta-btn" target="_blank">
+          <span>Agendar Visita no WhatsApp</span>
+          <span>➔</span>
+        </a>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="orcamento-footer">
+      <div>Bhalf Centro Integrativo · Mitzi Herter Brum · CNPJ e contrato sob consulta</div>
+      <div>Rua Dom Luiz Guanella, 2761, Capão da Canoa / RS</div>
+    </footer>
+
+  </div>
+
+</body>
+</html>

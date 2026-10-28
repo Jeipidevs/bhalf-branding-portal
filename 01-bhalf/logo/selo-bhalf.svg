@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Bhalf Centro Integrativo">
+  <!-- Selo da Bhalf: o letreiro da fachada (letras brancas sobre grafite), com
+       a sálvia das plantas da entrada no anel. Desenhado em 02/10/2026 porque a
+       única imagem da marca era a foto da fachada, com a palmeira na frente do B. -->
+  <defs>
+    <radialGradient id="g" cx="50%" cy="38%" r="70%">
+      <stop offset="0" stop-color="#2b3a32"/>
+      <stop offset="1" stop-color="#151f1a"/>
+    </radialGradient>
+  </defs>
+  <circle cx="240" cy="240" r="240" fill="url(#g)"/>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#a9c4a6" stroke-opacity=".55" stroke-width="2"/>
+  <text x="240" y="252" text-anchor="middle" fill="#f4f6f2"
+        font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="92" font-weight="700"
+        letter-spacing="14">BHALF</text>
+  <line x1="150" y1="286" x2="330" y2="286" stroke="#a9c4a6" stroke-opacity=".7" stroke-width="1.5"/>
+  <text x="240" y="322" text-anchor="middle" fill="#cfdccc"
+        font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="22" font-weight="500"
+        letter-spacing="7">CENTRO INTEGRATIVO</text>
+</svg>
