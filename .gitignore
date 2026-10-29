@@ -1,3 +1,4 @@
 .DS_Store
 *.mp4
+!assets/videos/*.mp4
 02-bellevie-salao/cartao-de-servicos-2026-10-28/runway/ornamento-ramo.png
